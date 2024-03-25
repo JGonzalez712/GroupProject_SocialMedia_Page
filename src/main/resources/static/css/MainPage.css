@@ -1,0 +1,107 @@
+@charset "ISO-8859-1";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.main-container{
+	margin: 0px auto;
+	display: flex;
+	border: 3px black solid;
+	width: 1200px;
+	height: 100dvh;
+	justify-content: space-between;
+}
+
+.left-column{
+	width: 300px;
+	border: 2px black solid;
+	justify-content: space-around;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	padding-left: 30px;
+}
+
+.icons-text{
+	display: flex;
+	/*border: 1px red solid;*/
+	width: auto;
+	border-radius: 20px;
+	align-items: center;
+	height: 50px;
+	transition: transform 0.3s ease-in-out;
+	padding: 3px;
+}
+
+
+.icons-text:hover {
+    transform: translateY(-5px);
+    background-color: rgb(224, 224, 224);
+}
+
+.icons-text p {
+    margin: 0;
+    font-size: large;  /*//Remove default margin for <p> tag */
+}
+
+.icons-text i {
+    font-size: 24px; 
+    margin-right: 10px;; }
+    
+/*.icons-text a {
+    width:100%;
+    border-radius: 30px;
+    color: white;
+    font-weight:bold;
+    font-size: 24px;
+}*/
+
+.user-column{
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	border: rgb(224, 224, 224) 4px solid;
+	justify-content: end;
+}
+
+.icons-text a {
+    color: inherit; /* Preserve the color inherited from the parent */
+    text-decoration: none; /* Remove underline */
+    display: flex;
+}
+
+/*Moving forward, all styling is dedicated to the central div.*/
+/*__________________________________________________________________________________________*/
+.central-column{
+	flex-grow: 1;
+	border: 2px rgb(255, 128, 0) solid;
+	justify-content: space-around;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	padding-left: 30px;
+}
+
+
+
+
+
+
+/*Moving forward, all styling is dedicated to the rigrh column.*/
+/*__________________________________________________________________________________________*/
+.right-column{
+	width: 300px;
+	border: 2px black solid;
+	justify-content: space-around;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	padding-left: 30px;
+}
+
+
+
+

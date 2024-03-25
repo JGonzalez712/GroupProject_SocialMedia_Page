@@ -46,6 +46,13 @@ public class User {
 	    @Size(min=8, max=128, message="Confirm Password must be at least 8")
 	    private String confirm;
 	    
+	    //this create our one-to-many from users and comments. Comments will be hanle on a 
+	    @OneToMany(mappedBy="user", fetch=FetchType.LAZY)
+	    private List<Comment> comments;
+	    
+	    @OneToMany(mappedBy="user", fetch=FetchType.LAZY)
+	    private List<CommentManyToMany> likes;
+	    
 	    @Column(updatable = false)
 		@DateTimeFormat(pattern = "yyyy-MM-dd")
 		private Date createdAt;
@@ -121,5 +128,22 @@ public class User {
 	    protected void onUpdate(){
 	    	this.updatedAt = new Date();
 	    }
+
+		public List<Comment> getComments() {
+			return comments;
+		}
+
+		public void setComments(List<Comment> comments) {
+			this.comments = comments;
+		}
+
+		public List<CommentManyToMany> getLikes() {
+			return likes;
+		}
+
+		public void setLikes(List<CommentManyToMany> likes) {
+			this.likes = likes;
+		}
+
 	    
 }
