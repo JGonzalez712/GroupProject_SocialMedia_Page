@@ -31,30 +31,48 @@
 
 		<!-- This div a everything displayed in the center of the main page -->
 		<div class="central-column flex-fill">
-			<div class="add-comment">
-				<h2>Create a comment</h2>
-				<form:form action="/createComment" method="post" modelAttribute="comment">
-					<div class="input-group mb-3">
-						<form:input type="hidden" path="author" value="${loggedInId}"/>
-						<form:errors path="content" />
-						<form:input path="content" class="form-control" placeholder="add a comment" aria-label="comment" aria-describedby="add-comment"/>
-						<button class="btn btn-outline-primary" type="submit" id="add-comment">Button</button>
+
+			<div class="row my-3">
+				<form:form action="/story/add" method="post" modelAttribute="story">
+					<h4 class="text-primary">What if...</h4>
+					<form:errors path="title" class="errors" />
+					<div class="form-floating mb-2">
+						<form:input type="text" class="form-control border border-primary border-1 text-primary" id="input-story" path="title"/>
+						<form:label for="input-story" path="title">Title or Question</form:label>
 					</div>
+					<div class="input-group">
+						<div class="form-floating">
+							<form:textarea path="content" class="form-control border border-primary border-1 text-primary" id="textarea-story" style="height: 100px;"></form:textarea>
+							<form:label for="textarea-story" path="content">Story</form:label>
+						</div>		
+						<form:errors path="content" class="errors" />			
+						<button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>					
+					</div>
+					<form:input type="hidden" path="author" value="${loggedInId}"/>		
 				</form:form>
 			</div>
-
-			<!-- list of comments -->
-			<c:forEach var="comment" items="${comments}">
-				<div class="comments border-top my-2 py-2">
-					<div class="comment-author d-flex">
-						<img src="https://avatar.iran.liara.run/public" class="rounded" alt="avatar" style="width:64px; height:64px">
-						<p class="px-3 mt-3">Name <span class="text-secondary"> @${comment.author.username}</span> - <small><fmt:formatDate value = "${comment.createdAt}" type ="date"/></small></p>
 						
+			<c:forEach var="story" items="${stories}">
+				<div class="row">
+				
+					<div class="col-xl-12 border-top my-2 py-2">
+						<div class="comment-author d-flex">
+							<img src="/images/avatar.png" class="rounded" alt="avatar" style="width:64px; height:64px">
+							<p class="px-3 mt-3">Name <span class="text-secondary"> @${loggedUser.username}</span> - <small><fmt:formatDate value = "${story.createdAt}" type ="date"/></small></p>
+							
+						</div>
+						<p class="fs-4 fw-semibold"><a href="/story/${story.id}"><span>What if ...</span> ${story.title}</a></p>
+						<p class="pt-1">${story.content}</p>
+						<div class="reaction-btn d-flex">
+							<a href="/story/${story.id}#story-comments" class="reaction-like mx-3"><i class="fa-regular fa-heart"></i> ${story.likes.size()}</a>
+							<a href="/story/${story.id}#story-comments" class="reaction-post mx-3"><i class="fa-regular fa-comment"></i> ${story.comments.size()}</a>
+							<a href="#" class="reaction-save mx-3"><i class="fa-regular fa-bookmark"></i></a>
+						
+						</div>
 					</div>
-					<p class="pt-1">${comment.content}</p>
 				</div>
+			
 			</c:forEach>
-
 		
 		</div> <!-- end of central-column -->
 	
