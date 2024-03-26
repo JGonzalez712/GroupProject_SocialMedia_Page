@@ -17,7 +17,10 @@ import com.jonathan.group_project.services.CommentService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @Controller
 @RequestMapping("/story")
@@ -88,4 +91,36 @@ public class StoryController {
         return "redirect:/story/" + id;
     }
 
+    @GetMapping("/{storyId}/edit")
+    public String showEditForm(@PathVariable("storyId") long id, Model model, HttpSession session) {
+        if (session.getAttribute("loggedInId") == null) {
+            return "redirect:/";
+        }
+        long loggedUserId = (Long) session.getAttribute("loggedInId");
+        model.addAttribute("loggedUser", userService.findOneUser(loggedUserId));
+        model.addAttribute("story", storyService.oneStory(id));
+        return "story-edit.jsp";
+    }
+
+    @PutMapping("/{storyId}/edit")
+    public String editStory(@PathVariable("storyId") long id, @Valid @ModelAttribute("story") Story story,
+            BindingResult result, Model model, HttpSession session) {
+        if (session.getAttribute("loggedInId") == null) {
+            return "redirect:/";
+        }
+        if (result.hasErrors()) {
+            System.out.println(result.toString());
+            long loggedUserId = (Long) session.getAttribute("loggedInId");
+            model.addAttribute("loggedUser", userService.findOneUser(loggedUserId));
+            return "story-edit.jsp";
+        }
+        storyService.save(story);
+        return "redirect:/story/" + id;
+    }
+
+    @DeleteMapping("/{storyId}/delete")
+    public String deleteStory(@PathVariable("storyId") long id) {
+        storyService.deleteStory(id);
+        return "redirect:/home";
+    }
 }

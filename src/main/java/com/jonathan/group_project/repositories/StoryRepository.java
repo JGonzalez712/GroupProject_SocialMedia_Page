@@ -17,4 +17,5 @@ public interface StoryRepository extends ListPagingAndSortingRepository<Story, L
 
     Story save(Story s);
 
+    void deleteById(long id);
 }

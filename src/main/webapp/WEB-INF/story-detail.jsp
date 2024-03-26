@@ -41,10 +41,18 @@
 					</div>
 					<p class="fs-4 fw-semibold text-primary"><span>What if ...</span> ${story.title}</p>
 					<p class="pt-1">${story.content}</p>
-					<div class="reaction-btn d-flex">
-						<a href="#" class="reaction-like mx-3"><i class="fa-regular fa-heart"></i> ${story.likes.size()}</a>
-						<a href="#" class="reaction-post mx-3"><i class="fa-regular fa-comment"></i> ${story.comments.size()}</a>
-						<a href="#" class="reaction-save mx-3"><i class="fa-regular fa-bookmark"></i></a>
+					<div class="d-flex justify-content-between">
+						<div class="reaction-btn d-flex">
+							<a href="#" class="reaction-like mx-3"><i class="fa-regular fa-heart"></i> ${story.likes.size()}</a>
+							<a href="#" class="reaction-post mx-3"><i class="fa-regular fa-comment"></i> ${story.comments.size()}</a>
+							<a href="#" class="reaction-save mx-3"><i class="fa-regular fa-bookmark"></i></a>					
+						</div>
+						<c:if test="${story.author.id==loggedUser.id}">
+							<div class="reaction-btn-admin">
+								<a href="/story/${story.id}/edit" class="reaction-edit mx-2 text-dark"><i class="fa-regular fa-pen-to-square"></i></a>
+								<button data-bs-toggle="modal" data-bs-target="#deletion-modal" class="reaction-delete mx-2 btn"><i class="fa-solid fa-trash"></i></button>
+							</div>						
+						</c:if>
 					
 					</div>
 				</div>
@@ -90,8 +98,32 @@
 
 		<%@ include file="right-column.jsp" %>
 		
-		
 	</div>
 
+		 <!-- Modal for deletion request -->
+    <div class="modal" tabindex="-1" id="deletion-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Deletion Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete this story: "<strong class="text-purple">${story.title}</strong>"?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <form action="/story/${story.id}/delete" method="post">
+                    <input type="hidden" value="delete" name="_method">
+                    <button type="submit" class="btn btn-danger">Yes, delete</button>
+                </form> 
+                
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end of modal-->
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
