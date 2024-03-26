@@ -12,6 +12,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
@@ -70,13 +72,15 @@ public class User {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
 
-	@ManyToMany(mappedBy = "likes")
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "story_like", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "story_id"))
 	private Set<Story> likedStories;
 
 	@OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
 	private List<Story> authoredStories;
 
-	@ManyToMany(mappedBy = "usersWhoSavedMe")
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "saved_stories", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "story_id"))
 	private List<Story> savedStories;
 
 	public User() {

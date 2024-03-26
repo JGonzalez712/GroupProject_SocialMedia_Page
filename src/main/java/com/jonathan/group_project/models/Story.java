@@ -21,6 +21,7 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "stories")
@@ -34,6 +35,7 @@ public class Story {
     private String title;
 
     @NotBlank
+    @Size(min = 1, max = 240)
     private String content;
 
     @Column(updatable = false)
@@ -50,10 +52,6 @@ public class Story {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User author;
-
-    @ManyToMany
-    @JoinTable(name = "taggings", joinColumns = @JoinColumn(name = "story_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
-    private List<Tag> tags;
 
     @OneToMany(mappedBy = "story", fetch = FetchType.LAZY)
     private List<Comment> comments;
@@ -135,14 +133,6 @@ public class Story {
 
     public void setAuthor(User author) {
         this.author = author;
-    }
-
-    public List<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
     }
 
     public List<Comment> getComments() {

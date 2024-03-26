@@ -28,8 +28,4 @@ public class StoryService {
         return storyRepository.save(story);
     }
 
-    public List<Story> getStoriesByTag(String tag){
-        return storyRepository.findByTag(tag);
-    }
-
 }

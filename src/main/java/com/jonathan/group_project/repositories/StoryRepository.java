@@ -2,7 +2,6 @@ package com.jonathan.group_project.repositories;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListPagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.domain.Sort;
@@ -15,9 +14,6 @@ public interface StoryRepository extends ListPagingAndSortingRepository<Story, L
     List<Story> findAll(Sort sort);
 
     Story findById(long id);
-
-    @Query(value = "select s from stories s join taggings tg on s.id=tg.story_id join tags t on tg.tag_id=t.id where t.name=?1", nativeQuery = true)
-    List<Story> findByTag(String tag);
 
     Story save(Story s);
 
