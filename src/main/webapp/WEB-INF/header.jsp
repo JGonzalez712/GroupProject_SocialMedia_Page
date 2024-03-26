@@ -10,10 +10,12 @@
             
             <div class="collapse navbar-collapse" id="navbarButtonsExample">
                 
-                <div class="d-flex align-items-center ms-auto border-start">
-                    <a href="/myaccount" class="d-flex align-items-center justify-content-center p-1 text-decoration-none" >
-                        <i class="fa-regular fa-circle-user fa-lg px-3"></i>
-                    </a>
+                <div class="d-flex align-items-center justify-content-between ms-auto">
+                    
+                        <img src="/images/avatar.png" class="rounded" alt="avatar" style="width:32px; height:32px">
+                        <a class="mt-3 pl-3" href="#">My Profile</a> 
+                        
+                    
                     
                     <a href="/logout" class="text-decoration-none btn btn-dark mx-2 px-3 pt-1"><i class="fa-solid fa-right-from-bracket fa-xl"></i></a>
                     
