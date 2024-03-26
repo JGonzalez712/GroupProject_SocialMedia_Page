@@ -2,9 +2,9 @@ package com.jonathan.group_project.models;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +12,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -23,127 +24,185 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
-	   @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
-	    
-	    @NotBlank(message="Username is required!")
-	    @Size(min=3, max=30, message="Username must be between 3 characters")
-	    private String userName;
-	    
-	    @NotBlank(message="Email is required!")
-	    @Email(message="Please enter a valid email!")
-	    private String email;
-	    
-	    @NotBlank(message="Password is required!")
-	    @Size(min=8, max=128, message="Password must be at least 8 characterds")
-	    private String password;
-	    
-	    @Transient
-	    @NotEmpty(message="Confirm Password is required!")
-	    @Size(min=8, max=128, message="Confirm Password must be at least 8")
-	    private String confirm;
-	    
-	    //this create our one-to-many from users and comments. Comments will be hanle on a 
-	    @OneToMany(mappedBy="user", fetch=FetchType.LAZY)
-	    private List<Comment> comments;
-	    
-	    @OneToMany(mappedBy="user", fetch=FetchType.LAZY)
-	    private List<CommentManyToMany> likes;
-	    
-	    @Column(updatable = false)
-		@DateTimeFormat(pattern = "yyyy-MM-dd")
-		private Date createdAt;
-		
-		@DateTimeFormat(pattern = "yyyy-MM-dd")
-		private Date updatedAt;
-		
-		public User() {}
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	/*
+	 * TODO: to be added later: a user needs a first and last name
+	 * 
+	 * @NotBlank
+	 * private String firstname;
+	 * 
+	 * @Column(nullable = true)
+	 * private String lastname;
+	 */
+	@NotBlank(message = "Username is required!")
+	@Size(min = 3, max = 30, message = "Username must be between 3 characters")
+	private String username;
 
-		public Long getId() {
-			return id;
-		}
+	@NotBlank(message = "Email is required!")
+	@Email(message = "Please enter a valid email!")
+	private String email;
 
-		public void setId(Long id) {
-			this.id = id;
-		}
+	@NotBlank(message = "Password is required!")
+	@Size(min = 8, max = 128, message = "Password must be at least 8 characterds")
+	private String password;
 
-		public String getUserName() {
-			return userName;
-		}
+	@Transient
+	@NotEmpty(message = "Confirm Password is required!")
+	@Size(min = 8, max = 128, message = "Confirm Password must be at least 8")
+	private String confirm;
 
-		public void setUserName(String userName) {
-			this.userName = userName;
-		}
+	// this create our one-to-many from users and comments. Comments will be hanle
+	// on a
+	@OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+	private List<Comment> comments;
 
-		public String getEmail() {
-			return email;
-		}
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<CommentLikedByUsers> likedComments;
 
-		public void setEmail(String email) {
-			this.email = email;
-		}
+	@Column(updatable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date createdAt;
 
-		public String getPassword() {
-			return password;
-		}
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date updatedAt;
 
-		public void setPassword(String password) {
-			this.password = password;
-		}
+	@ManyToMany(mappedBy = "likes")
+	private Set<Story> likedStories;
 
-		public String getConfirm() {
-			return confirm;
-		}
+	@OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+	private List<Story> authoredStories;
 
-		public void setConfirm(String confirm) {
-			this.confirm = confirm;
-		}
+	@ManyToMany(mappedBy = "usersWhoSavedMe")
+	private List<Story> savedStories;
 
-		public Date getCreatedAt() {
-			return createdAt;
-		}
+	public User() {
+	}
 
-		public void setCreatedAt(Date createdAt) {
-			this.createdAt = createdAt;
-		}
+	public Long getId() {
+		return id;
+	}
 
-		public Date getUpdatedAt() {
-			return updatedAt;
-		}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-		public void setUpdatedAt(Date updatedAt) {
-			this.updatedAt = updatedAt;
-		}
-	    
+	public String getUsername() {
+		return username;
+	}
 
-		@PrePersist
-	    protected void onCreate(){
-	        this.createdAt = new Date();
-	    }
-	    
-		@PreUpdate
-	    protected void onUpdate(){
-	    	this.updatedAt = new Date();
-	    }
+	public void setUsername(String userName) {
+		this.username = userName;
+	}
 
-		public List<Comment> getComments() {
-			return comments;
-		}
+	public String getEmail() {
+		return email;
+	}
 
-		public void setComments(List<Comment> comments) {
-			this.comments = comments;
-		}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-		public List<CommentManyToMany> getLikes() {
-			return likes;
-		}
+	public String getPassword() {
+		return password;
+	}
 
-		public void setLikes(List<CommentManyToMany> likes) {
-			this.likes = likes;
-		}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-	    
+	public String getConfirm() {
+		return confirm;
+	}
+
+	public void setConfirm(String confirm) {
+		this.confirm = confirm;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	@PrePersist
+	protected void onCreate() {
+		this.createdAt = new Date();
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		this.updatedAt = new Date();
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public List<CommentLikedByUsers> getLikedComments() {
+		return likedComments;
+	}
+
+	public void setLikedComments(List<CommentLikedByUsers> likedComments) {
+		this.likedComments = likedComments;
+	}
+
+	public Set<Story> getLikedStories() {
+		return likedStories;
+	}
+
+	public void setLikedStories(Set<Story> likedStories) {
+		this.likedStories = likedStories;
+	}
+
+	public List<Story> getAuthoredStories() {
+		return authoredStories;
+	}
+
+	public void setAuthoredStories(List<Story> authoredStories) {
+		this.authoredStories = authoredStories;
+	}
+
+	public List<Story> getSavedStories() {
+		return savedStories;
+	}
+
+	public void setSavedStories(List<Story> savedStories) {
+		this.savedStories = savedStories;
+	}
+	/*
+	 * TODO: to be added later
+	 * public String getFirstname() {
+	 * return firstname;
+	 * }
+	 * 
+	 * public void setFirstname(String firstname) {
+	 * this.firstname = firstname;
+	 * }
+	 * 
+	 * public String getLastname() {
+	 * return lastname;
+	 * }
+	 * 
+	 * public void setLastname(String lastname) {
+	 * this.lastname = lastname;
+	 * }
+	 */
 }
