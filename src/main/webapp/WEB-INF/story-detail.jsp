@@ -67,13 +67,18 @@
 			<div id="story-comments">
                 <!-- list of comments -->
                 <c:forEach var="comment" items="${story.comments}">
-                    <div class="comments border-top my-2 pt-2">
-                        <div class="comment-author d-flex">
-                            <img src="https://avatar.iran.liara.run/public/boy" class="rounded" alt="avatar" style="width:32px; height:32px">
-                            <p class="px-2">Name <span class="text-secondary"> @${comment.author.username}</span> - <small><fmt:formatDate value = "${comment.createdAt}" type ="date"/></small></p>
+                    <div class="row comments border-top my-2 pt-2">
+                        <div class="d-flex justify-content-between">
+						 	<div class="comment-author d-flex">
+                            	<img src="https://avatar.iran.liara.run/public/boy" class="rounded" alt="avatar" style="width:32px; height:32px">
+                            	<p class="px-2">Name <span class="text-secondary"> @${comment.author.username}</span> - <small><fmt:formatDate value = "${comment.createdAt}" type ="date"/></small></p>
                             
-                        </div>
-                        <p class="pt-1">${comment.content}</p>
+                        	</div>
+							<a href="#" class="text-secondary"><i class="fa-regular fa-heart fa-xl"></i></a>
+						
+						
+						</div>
+                        <p>${comment.content}</p>
                     </div>
                 </c:forEach>
             
