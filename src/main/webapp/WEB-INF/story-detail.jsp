@@ -39,12 +39,20 @@
 						<p class="px-3 mt-3">Name <span class="text-secondary"> @${loggedUser.username}</span> - <small><fmt:formatDate value = "${story.createdAt}" type ="date"/></small></p>
 						
 					</div>
-					<p class="fs-4 fw-semibold"><a href="/story/1000"><span>What if ...</span> ${story.title}</a></p>
+					<p class="fs-4 fw-semibold text-primary"><span>What if ...</span> ${story.title}</p>
 					<p class="pt-1">${story.content}</p>
-					<div class="reaction-btn d-flex">
-						<a href="#" class="reaction-like mx-3"><i class="fa-regular fa-heart"></i> ${story.likes.size()}</a>
-						<a href="#" class="reaction-post mx-3"><i class="fa-regular fa-comment"></i> ${story.comments.size()}</a>
-						<a href="#" class="reaction-save mx-3"><i class="fa-regular fa-bookmark"></i></a>
+					<div class="d-flex justify-content-between">
+						<div class="reaction-btn d-flex">
+							<a href="#" class="reaction-like mx-3"><i class="fa-regular fa-heart"></i> ${story.likes.size()}</a>
+							<a href="#" class="reaction-post mx-3"><i class="fa-regular fa-comment"></i> ${story.comments.size()}</a>
+							<a href="#" class="reaction-save mx-3"><i class="fa-regular fa-bookmark"></i></a>					
+						</div>
+						<c:if test="${story.author.id==loggedUser.id}">
+							<div class="reaction-btn-admin">
+								<a href="/story/${story.id}/edit" class="reaction-edit mx-2 text-dark"><i class="fa-regular fa-pen-to-square"></i></a>
+								<button data-bs-toggle="modal" data-bs-target="#deletion-modal" class="reaction-delete mx-2 btn"><i class="fa-solid fa-trash"></i></button>
+							</div>						
+						</c:if>
 					
 					</div>
 				</div>
@@ -55,7 +63,7 @@
 			<div class="add-comment">
 				<form:form action="/story/${story.id}/comment" method="post" modelAttribute="comment">
 					<form:hidden path="author" value="${loggedInId}"/>
-                    <form:hidden path="story" value="${story.id}"/>
+                    <!--<form:hidden path="story" value="${story.id}"/>-->
 					<form:errors path="content" class="errors" />
 					<div class="input-group mb-3">						
 						<form:input path="content" class="form-control" placeholder="add a comment" aria-label="comment" aria-describedby="add-comment"/>
@@ -67,13 +75,18 @@
 			<div id="story-comments">
                 <!-- list of comments -->
                 <c:forEach var="comment" items="${story.comments}">
-                    <div class="comments border-top my-2 pt-2">
-                        <div class="comment-author d-flex">
-                            <img src="https://avatar.iran.liara.run/boy" class="rounded" alt="avatar" style="width:64px; height:64px">
-                            <p class="px-3 mt-3">Name <span class="text-secondary"> @${comment.author.username}</span> - <small><fmt:formatDate value = "${comment.createdAt}" type ="date"/></small></p>
+                    <div class="row comments border-top my-2 pt-2">
+                        <div class="d-flex justify-content-between">
+						 	<div class="comment-author d-flex">
+                            	<img src="https://avatar.iran.liara.run/public/boy" class="rounded" alt="avatar" style="width:32px; height:32px">
+                            	<p class="px-2">Name <span class="text-secondary"> @${comment.author.username}</span> - <small><fmt:formatDate value = "${comment.createdAt}" type ="date"/></small></p>
                             
-                        </div>
-                        <p class="pt-1">${comment.content}</p>
+                        	</div>
+							<a href="#" class="text-secondary"><i class="fa-regular fa-heart fa-xl"></i></a>
+						
+						
+						</div>
+                        <p>${comment.content}</p>
                     </div>
                 </c:forEach>
             
@@ -85,8 +98,32 @@
 
 		<%@ include file="right-column.jsp" %>
 		
-		
 	</div>
 
+		 <!-- Modal for deletion request -->
+    <div class="modal" tabindex="-1" id="deletion-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Deletion Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete this story: "<strong class="text-purple">${story.title}</strong>"?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <form action="/story/${story.id}/delete" method="post">
+                    <input type="hidden" value="delete" name="_method">
+                    <button type="submit" class="btn btn-danger">Yes, delete</button>
+                </form> 
+                
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end of modal-->
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

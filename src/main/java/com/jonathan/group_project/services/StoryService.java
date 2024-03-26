@@ -28,4 +28,7 @@ public class StoryService {
         return storyRepository.save(story);
     }
 
+    public void deleteStory(long id) {
+        storyRepository.deleteById(id);
+    }
 }
