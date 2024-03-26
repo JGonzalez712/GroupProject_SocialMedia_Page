@@ -137,4 +137,28 @@ public class Story {
         this.author = author;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<User> getUsersWhoSavedMe() {
+        return usersWhoSavedMe;
+    }
+
+    public void setUsersWhoSavedMe(List<User> usersWhoSavedMe) {
+        this.usersWhoSavedMe = usersWhoSavedMe;
+    }
+
 }
