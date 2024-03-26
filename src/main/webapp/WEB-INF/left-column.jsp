@@ -54,7 +54,7 @@
 	
 
 	<div class="btn-post my-4">
-		<a href="/" class="btn btn-dark" role="button" style="width:200px">Profile</a>
+		<a href="/" class="btn btn-dark" role="button" style="width:200px">logout</a>
 	</div>
 
 	

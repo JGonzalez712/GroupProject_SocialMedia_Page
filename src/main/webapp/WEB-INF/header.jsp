@@ -4,7 +4,7 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarButtonsExample" aria-expanded="false" >
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a href="/#" class="navbar-brand">
+            <a href="/home" class="navbar-brand">
 				<h3> <i class="fa-solid fa-circle-question fa-2xl"></i> What if </h3>
 			</a>
             
