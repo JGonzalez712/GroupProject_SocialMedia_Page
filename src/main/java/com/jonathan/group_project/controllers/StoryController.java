@@ -70,6 +70,7 @@ public class StoryController {
     @PostMapping("/{storyId}/comment")
     public String addComment(@PathVariable("storyId") long id, @Valid @ModelAttribute("comment") Comment comment,
             BindingResult result, Model model, HttpSession session) {
+        Story story = storyService.oneStory(id);
 
         if (session.getAttribute("loggedInId") == null) {
             return "redirect:/";
@@ -79,11 +80,10 @@ public class StoryController {
             long loggedUserId = (Long) session.getAttribute("loggedInId");
             model.addAttribute("loggedUser", userService.findOneUser(loggedUserId));
             model.addAttribute("comment", new Comment());
-            model.addAttribute("story", storyService.oneStory(id));
-            System.out.println(result.toString());
+            model.addAttribute("story", story);
             return "story-detail.jsp";
         }
-
+        comment.setStory(story);
         commentService.createComment(comment);
         return "redirect:/story/" + id;
     }

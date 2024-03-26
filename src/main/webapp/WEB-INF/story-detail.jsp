@@ -39,7 +39,7 @@
 						<p class="px-3 mt-3">Name <span class="text-secondary"> @${loggedUser.username}</span> - <small><fmt:formatDate value = "${story.createdAt}" type ="date"/></small></p>
 						
 					</div>
-					<p class="fs-4 fw-semibold"><a href="/story/1000"><span>What if ...</span> ${story.title}</a></p>
+					<p class="fs-4 fw-semibold text-primary"><span>What if ...</span> ${story.title}</p>
 					<p class="pt-1">${story.content}</p>
 					<div class="reaction-btn d-flex">
 						<a href="#" class="reaction-like mx-3"><i class="fa-regular fa-heart"></i> ${story.likes.size()}</a>
@@ -55,7 +55,7 @@
 			<div class="add-comment">
 				<form:form action="/story/${story.id}/comment" method="post" modelAttribute="comment">
 					<form:hidden path="author" value="${loggedInId}"/>
-                    <form:hidden path="story" value="${story.id}"/>
+                    <!--<form:hidden path="story" value="${story.id}"/>-->
 					<form:errors path="content" class="errors" />
 					<div class="input-group mb-3">						
 						<form:input path="content" class="form-control" placeholder="add a comment" aria-label="comment" aria-describedby="add-comment"/>
@@ -69,8 +69,8 @@
                 <c:forEach var="comment" items="${story.comments}">
                     <div class="comments border-top my-2 pt-2">
                         <div class="comment-author d-flex">
-                            <img src="https://avatar.iran.liara.run/boy" class="rounded" alt="avatar" style="width:64px; height:64px">
-                            <p class="px-3 mt-3">Name <span class="text-secondary"> @${comment.author.username}</span> - <small><fmt:formatDate value = "${comment.createdAt}" type ="date"/></small></p>
+                            <img src="https://avatar.iran.liara.run/public/boy" class="rounded" alt="avatar" style="width:32px; height:32px">
+                            <p class="px-2">Name <span class="text-secondary"> @${comment.author.username}</span> - <small><fmt:formatDate value = "${comment.createdAt}" type ="date"/></small></p>
                             
                         </div>
                         <p class="pt-1">${comment.content}</p>

@@ -39,7 +39,7 @@ public class Comment {
 	@OneToMany(mappedBy = "comment", fetch = FetchType.LAZY)
 	private List<CommentLikedByUsers> usersWhoLikedMe;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "story_id")
 	private Story story;
 
@@ -117,6 +117,11 @@ public class Comment {
 
 	public void setStory(Story story) {
 		this.story = story;
+	}
+
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", content=" + content + ", author=" + author + ", story=" + story + "]";
 	}
 
 }

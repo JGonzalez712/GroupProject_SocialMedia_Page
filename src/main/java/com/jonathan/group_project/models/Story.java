@@ -151,4 +151,9 @@ public class Story {
         this.usersWhoSavedMe = usersWhoSavedMe;
     }
 
+    @Override
+    public String toString() {
+        return "Story [id=" + id + ", title=" + title + ", author=" + author + ", comments=" + comments + "]";
+    }
+
 }
