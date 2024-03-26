@@ -1,7 +1,5 @@
 package com.jonathan.group_project.models;
 
-
-
 import java.util.Date;
 import java.util.List;
 
@@ -23,43 +21,47 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name= "comments")
+@Table(name = "comments")
 public class Comment {
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank(message = "Please add a comment")
-	@Size(min=1, max =240, message ="Your comment must be at least one character")
+	@Size(min = 1, max = 240, message = "Your comment must be at least one character")
 	private String content;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
-	private User user;
-	
-	@OneToMany(mappedBy="comment", fetch=FetchType.LAZY)
-    private List<CommentManyToMany> users;
-	
-	public Comment () {}
-	
+	@JoinColumn(name = "user_id")
+	private User author;
+
+	@OneToMany(mappedBy = "comment", fetch = FetchType.LAZY)
+	private List<CommentLikedByUsers> usersWhoLikedMe;
+
+	@ManyToOne
+	@JoinColumn(name = "story_id")
+	private Story story;
+
+	public Comment() {
+	}
+
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
-	
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
-	
+
 	@PrePersist
-    protected void onCreate(){
-        this.createdAt = new Date();
-    }
-    
+	protected void onCreate() {
+		this.createdAt = new Date();
+	}
+
 	@PreUpdate
-    protected void onUpdate(){
-    	this.updatedAt = new Date();
-    }
+	protected void onUpdate() {
+		this.updatedAt = new Date();
+	}
 
 	public Long getId() {
 		return id;
@@ -93,22 +95,28 @@ public class Comment {
 		this.updatedAt = updatedAt;
 	}
 
-	public List<CommentManyToMany> getUsers() {
-		return users;
+	public User getAuthor() {
+		return author;
 	}
 
-	public void setUsers(List<CommentManyToMany> users) {
-		this.users = users;
+	public void setAuthor(User author) {
+		this.author = author;
 	}
 
-	public User getUser() {
-		return user;
+	public List<CommentLikedByUsers> getUsersWhoLikedMe() {
+		return usersWhoLikedMe;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsersWhoLikedMe(List<CommentLikedByUsers> usersWhoLikedMe) {
+		this.usersWhoLikedMe = usersWhoLikedMe;
 	}
-	
-	
-	
+
+	public Story getStory() {
+		return story;
+	}
+
+	public void setStory(Story story) {
+		this.story = story;
+	}
+
 }

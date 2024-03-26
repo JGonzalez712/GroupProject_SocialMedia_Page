@@ -15,29 +15,30 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="comments_liked_by_users")
-public class CommentManyToMany {
-	
+@Table(name = "comments_liked_by_users")
+public class CommentLikedByUsers {
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
-	
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id")
-    private User user;
-	
+	@JoinColumn(name = "user_id")
+	private User user;
+
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="comment_id")
-    private Comment comment;
-	
-	public CommentManyToMany() {}
+	@JoinColumn(name = "comment_id")
+	private Comment comment;
+
+	public CommentLikedByUsers() {
+	}
 
 	public Long getId() {
 		return id;
@@ -78,6 +79,5 @@ public class CommentManyToMany {
 	public void setComment(Comment comment) {
 		this.comment = comment;
 	}
-	
-	
+
 }

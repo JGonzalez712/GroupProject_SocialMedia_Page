@@ -52,11 +52,11 @@
 				<form:form action="registration" method="POST" modelAttribute="user">
 					<h2>Register</h2>
 					<div class="mb-3">
-						<form:label for="input-username" path="userName"
+						<form:label for="input-username" path="username"
 							class="form-label">Username</form:label>
-						<form:input type="text" path="userName" class="form-control"
+						<form:input type="text" path="username" class="form-control"
 							id="input-username" aria-describedby="input-username" />
-						<span style = "color:red"><form:errors path="userName" /> </span>
+						<span style = "color:red"><form:errors path="username" /> </span>
 					</div>
 					<div class="mb-3">
 						<form:label for="input-email" path="email"
