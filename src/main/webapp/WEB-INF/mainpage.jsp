@@ -35,7 +35,7 @@
 				<h2>Create a comment</h2>
 				<form:form action="/createComment" method="post" modelAttribute="comment">
 					<div class="input-group mb-3">
-						<form:input type="hidden" path="user" value="${loggedInId}"/>
+						<form:input type="hidden" path="author" value="${loggedInId}"/>
 						<form:errors path="content" />
 						<form:input path="content" class="form-control" placeholder="add a comment" aria-label="comment" aria-describedby="add-comment"/>
 						<button class="btn btn-outline-primary" type="submit" id="add-comment">Button</button>
@@ -48,7 +48,7 @@
 				<div class="comments border-top my-2 py-2">
 					<div class="comment-author d-flex">
 						<img src="https://avatar.iran.liara.run/public" class="rounded" alt="avatar" style="width:64px; height:64px">
-						<p class="px-3 mt-3">Name <span class="text-secondary"> @${comment.user.userName}</span> - <small><fmt:formatDate value = "${comment.createdAt}" type ="date"/></small></p>
+						<p class="px-3 mt-3">Name <span class="text-secondary"> @${comment.author.username}</span> - <small><fmt:formatDate value = "${comment.createdAt}" type ="date"/></small></p>
 						
 					</div>
 					<p class="pt-1">${comment.content}</p>
