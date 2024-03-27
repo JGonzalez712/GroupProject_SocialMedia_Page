@@ -32,15 +32,13 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	/*
-	 * TODO: to be added later: a user needs a first and last name
-	 * 
-	 * @NotBlank
-	 * private String firstname;
-	 * 
-	 * @Column(nullable = true)
-	 * private String lastname;
-	 */
+
+	@NotBlank
+	private String firstname;
+
+	@Column(nullable = true)
+	private String lastname;
+
 	@NotBlank(message = "Username is required!")
 	@Size(min = 3, max = 30, message = "Username must be between 3 characters")
 	private String username;
@@ -192,22 +190,21 @@ public class User {
 	public void setSavedStories(List<Story> savedStories) {
 		this.savedStories = savedStories;
 	}
-	/*
-	 * TODO: to be added later
-	 * public String getFirstname() {
-	 * return firstname;
-	 * }
-	 * 
-	 * public void setFirstname(String firstname) {
-	 * this.firstname = firstname;
-	 * }
-	 * 
-	 * public String getLastname() {
-	 * return lastname;
-	 * }
-	 * 
-	 * public void setLastname(String lastname) {
-	 * this.lastname = lastname;
-	 * }
-	 */
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
 }

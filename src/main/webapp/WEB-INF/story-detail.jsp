@@ -35,8 +35,8 @@
 				
 				<div class="col-xl-12 my-2 py-2">
 					<div class="comment-author d-flex">
-						<img src="https://avatar.iran.liara.run/public" class="rounded" alt="avatar" style="width:64px; height:64px">
-						<p class="px-3 mt-3">Name <span class="text-secondary"> @${loggedUser.username}</span> - <small><fmt:formatDate value = "${story.createdAt}" type ="date"/></small></p>
+						<img src="https://avatar.iran.liara.run/username?username=${story.author.firstname}+${story.author.lastname}" class="rounded" alt="avatar" style="width:64px; height:64px">
+						<p class="px-3 mt-3">${story.author.firstname} ${story.author.lastname} <span class="text-secondary"> @${story.author.username}</span> - <small><fmt:formatDate value = "${story.createdAt}" type ="date"/></small></p>
 						
 					</div>
 					<p class="fs-4 fw-semibold text-primary"><span>What if ...</span> ${story.title}</p>
@@ -78,8 +78,8 @@
                     <div class="row comments border-top my-2 pt-2">
                         <div class="d-flex justify-content-between">
 						 	<div class="comment-author d-flex">
-                            	<img src="https://avatar.iran.liara.run/public/boy" class="rounded" alt="avatar" style="width:32px; height:32px">
-                            	<p class="px-2">Name <span class="text-secondary"> @${comment.author.username}</span> - <small><fmt:formatDate value = "${comment.createdAt}" type ="date"/></small></p>
+                            	<img src="https://avatar.iran.liara.run/username?username=${comment.author.firstname}+${comment.author.lastname}" class="rounded" alt="avatar" style="width:32px; height:32px">
+                            	<p class="px-2">${comment.author.firstname} ${comment.author.lastname} <span class="text-secondary"> @${comment.author.username}</span> - <small><fmt:formatDate value = "${comment.createdAt}" type ="date"/></small></p>
                             
                         	</div>
 							<!-- <a href="#" class="text-secondary"><i class="fa-regular fa-heart fa-xl"></i></a> -->
