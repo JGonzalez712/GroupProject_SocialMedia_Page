@@ -52,6 +52,19 @@
 				<form:form action="registration" method="POST" modelAttribute="user">
 					<h2>Register</h2>
 					<div class="mb-3">
+						<form:label for="input-firstname" path="firstname" class="form-label">Firstname</form:label>
+						<form:input type="text" path="firstname" class="form-control"
+							id="input-firstname" aria-describedby="input-firstname" />
+						<span style = "color:red"><form:errors path="firstname" /> </span>
+					</div>
+					<div class="mb-3">
+						<form:label for="input-lastname" path="lastname"
+							class="form-label">Lastname</form:label>
+						<form:input type="text" path="lastname" class="form-control"
+							id="input-lastname" aria-describedby="input-lastname" />
+						<span style = "color:red"><form:errors path="lastname" /> </span>
+					</div>
+					<div class="mb-3">
 						<form:label for="input-username" path="username"
 							class="form-label">Username</form:label>
 						<form:input type="text" path="username" class="form-control"
