@@ -64,10 +64,10 @@
 
 					<div class="col-xl-12 border-top my-2 py-2">
 						<div class="comment-author d-flex">
-							<img src="/images/avatar.png" class="rounded" alt="avatar"
+							<img src="https://avatar.iran.liara.run/username?username=${story.author.firstname}+${story.author.lastname}" class="rounded" alt="avatar"
 								style="width: 64px; height: 64px">
 							<p class="px-3 mt-3">
-								Username <span class="text-secondary">
+								${story.author.firstname} ${story.author.lastname} <span class="text-secondary">
 									@${story.author.username}</span> - <small><fmt:formatDate
 										value="${story.createdAt}" type="date" /></small>
 							</p>

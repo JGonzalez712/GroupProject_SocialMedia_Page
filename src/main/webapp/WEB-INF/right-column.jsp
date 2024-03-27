@@ -9,37 +9,15 @@
 
 	<div class="card p-3">
 		<h3>Who to follow?</h3>
-
-		<!--  <div class="d-flex justify-content-between mb-3">
-            <img src="https://avatar.iran.liara.run/public" class="rounded" alt="avatar" style="width:64px; height:64px">
-            <div class="">
-                <label>Name</label>
-                <p>@Name</p>            
-            </div>
-            <button class="btn btn-dark">Follow</button>
-        </div>
-
-        <div class="d-flex justify-content-between mb-3">
-            <img src="https://avatar.iran.liara.run/public" class="rounded" alt="avatar" style="width:64px; height:64px">
-            <div class="">
-                <label>username</label>
-                <p>{idsplaytheactualusername}</p>            
-            </div>
-            <button class="btn btn-dark">Follow</button>
-        </div> -->
-
-
+		
 		<!-- This forEach iterates through all the users in our database and retrieves the first two. 
 		We need to work on retrieving random users and preventing the retrieval of the logged-in user. However, I think it looks better than having default users -->
 		<c:forEach var="user" items="${users}" begin="0" end="1">
-			<div class="d-flex justify-content-between mb-3">
-				<img src="https://avatar.iran.liara.run/public" class="rounded"
+			<div class="d-flex justify-content-evenly mb-3 align-items-center">
+				<img src="https://avatar.iran.liara.run/username?username=${user.firstname}+${user.lastname}" class="rounded"
 					alt="avatar" style="width: 64px; height: 64px">
-				<div class="">
-					<label>Username:</label>
-					<p>${user.username}</p>
-				</div>
-				<button class="btn btn-dark">Follow</button>
+				<label>${user.firstname} ${user.lastname}</label>
+				<button class="btn btn-dark btn-sm">Follow</button>
 			</div>
 		</c:forEach>
 
