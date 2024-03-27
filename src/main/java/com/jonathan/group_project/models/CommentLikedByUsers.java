@@ -36,6 +36,7 @@ public class CommentLikedByUsers {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "comment_id")
 	private Comment comment;
+	
 
 	public CommentLikedByUsers() {
 	}
@@ -80,4 +81,7 @@ public class CommentLikedByUsers {
 		this.comment = comment;
 	}
 
+	
+	
+	
 }

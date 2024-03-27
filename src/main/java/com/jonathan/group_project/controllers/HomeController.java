@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.jonathan.group_project.models.Comment;
 import com.jonathan.group_project.models.Story;
+import com.jonathan.group_project.models.User;
 import com.jonathan.group_project.services.CommentService;
 import com.jonathan.group_project.services.StoryService;
 import com.jonathan.group_project.services.UserService;
@@ -42,6 +43,8 @@ public class HomeController {
 		model.addAttribute("story", new Story());
 		model.addAttribute("stories", storyService.allStories());
 		List<Comment> comments = cService.allComments();
+		List<User> users = uService.allUsers();
+		model.addAttribute("users", users);
 		model.addAttribute("comments", comments);
 		return "mainpage.jsp";
 	}

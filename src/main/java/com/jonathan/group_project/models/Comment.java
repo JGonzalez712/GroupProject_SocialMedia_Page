@@ -2,6 +2,7 @@ package com.jonathan.group_project.models;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,8 +13,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -36,9 +38,18 @@ public class Comment {
 	@JoinColumn(name = "user_id")
 	private User author;
 
-	@OneToMany(mappedBy = "comment", fetch = FetchType.LAZY)
-	private List<CommentLikedByUsers> usersWhoLikedMe;
-
+	/*
+	 * @OneToMany(mappedBy = "comment", fetch = FetchType.LAZY) private
+	 * List<CommentLikedByUsers> usersWhoLikedMe;
+	 */
+	
+	 // New many-to-many relationship for likes
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "comment_likes",
+            joinColumns = @JoinColumn(name = "comment_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> usersWhoLikedMe;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "story_id")
 	private Story story;
@@ -103,16 +114,25 @@ public class Comment {
 		this.author = author;
 	}
 
-	public List<CommentLikedByUsers> getUsersWhoLikedMe() {
+	/*
+	 * public List<CommentLikedByUsers> getUsersWhoLikedMe() { return
+	 * usersWhoLikedMe; }
+	 * 
+	 * public void setUsersWhoLikedMe(List<CommentLikedByUsers> usersWhoLikedMe) {
+	 * this.usersWhoLikedMe = usersWhoLikedMe; }
+	 */
+	
+	
+	public Story getStory() {
+		return story;
+	}
+
+	public Set<User> getUsersWhoLikedMe() {
 		return usersWhoLikedMe;
 	}
 
-	public void setUsersWhoLikedMe(List<CommentLikedByUsers> usersWhoLikedMe) {
+	public void setUsersWhoLikedMe(Set<User> usersWhoLikedMe) {
 		this.usersWhoLikedMe = usersWhoLikedMe;
-	}
-
-	public Story getStory() {
-		return story;
 	}
 
 	public void setStory(Story story) {
@@ -123,5 +143,5 @@ public class Comment {
 	public String toString() {
 		return "Comment [id=" + id + ", content=" + content + ", author=" + author + ", story=" + story + "]";
 	}
-
+	
 }

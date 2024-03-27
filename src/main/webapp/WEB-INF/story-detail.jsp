@@ -82,8 +82,25 @@
                             	<p class="px-2">Name <span class="text-secondary"> @${comment.author.username}</span> - <small><fmt:formatDate value = "${comment.createdAt}" type ="date"/></small></p>
                             
                         	</div>
-							<a href="#" class="text-secondary"><i class="fa-regular fa-heart fa-xl"></i></a>
-						
+							<!-- <a href="#" class="text-secondary"><i class="fa-regular fa-heart fa-xl"></i></a> -->
+							<c:choose>
+                    <c:when test="${comment.usersWhoLikedMe.contains(loggedUser)}">
+                        <!-- User has already liked the story -->
+                        <form action="/comment/dislikes/${loggedInId}/${comment.id}" method="post" class="reaction-like-form">
+                            <button type="submit" class="reaction-like mx-3" style="border: none; background: none; cursor: pointer;">
+                                <i class="fa-solid fa-heart"></i> ${comment.usersWhoLikedMe.size()}
+                            </button>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <!-- User has not liked the story -->
+                        <form action="/comment/likes/${loggedInId}/${comment.id}" method="post" class="reaction-like-form">
+                            <button type="submit" class="reaction-like mx-3" style="border: none; background: none; cursor: pointer;">
+                                <i class="fa-regular fa-heart"></i> ${comment.usersWhoLikedMe.size()}
+                            </button>
+                        </form>
+                    </c:otherwise>
+                </c:choose>
 						
 						</div>
                         <p>${comment.content}</p>
