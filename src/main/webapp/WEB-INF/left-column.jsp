@@ -1,11 +1,8 @@
 <div class="left-column" ><!-- Note: This div container manages everything displayed in the left column of the main page. -->
 	<div class="nav-icons">
-		<div class="icons-text">			 
-					
-			</div>
-
+	
 			<div class="icons-text">
-				<a href="/#">
+				<a href="/home">
 					<i class="fa-solid fa-house-chimney"></i>
 					<span>Home</span>
 				<a/>
@@ -38,7 +35,7 @@
 			</div>
 
 			<div class="icons-text">
-				<a href="/#">
+				<a href="/profile/${loggedUser.id}">
 					<i class="fa-regular fa-user"></i>
 					<span>Profile</span>
 				</a>

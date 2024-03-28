@@ -78,7 +78,8 @@
                     <div class="row comments border-top my-2 pt-2">
                         <div class="d-flex justify-content-between">
 						 	<div class="comment-author d-flex">
-                            	<img src="https://avatar.iran.liara.run/username?username=${comment.author.firstname}+${comment.author.lastname}" class="rounded" alt="avatar" style="width:32px; height:32px">
+                            	<img src="https://i.pravatar.cc/150?u=${comment.author.id }" class="rounded" alt="avatar"
+								style="width: 64px; height: 64px">
                             	<p class="px-2">${comment.author.firstname} ${comment.author.lastname} <span class="text-secondary"> @${comment.author.username}</span> - <small><fmt:formatDate value = "${comment.createdAt}" type ="date"/></small></p>
                             
                         	</div>

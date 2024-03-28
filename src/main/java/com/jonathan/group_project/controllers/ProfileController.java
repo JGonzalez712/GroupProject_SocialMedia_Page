@@ -23,7 +23,7 @@ public class ProfileController {
     @Autowired
     UserService userService;
 
-    @GetMapping("")
+    @GetMapping("/{id}")
     public String getUserProfile(HttpSession session, Model model) {
         if (session.getAttribute("loggedInId") == null) {
 
@@ -43,7 +43,7 @@ public class ProfileController {
         if (result.hasErrors()) {
             System.out.println(result.toString());
 
-            return "redirect:/profile";
+            return "redirect:/home";
         }
         // for some reasons, i'm having abug when trying to save object. I will
         // investigate later
@@ -61,8 +61,8 @@ public class ProfileController {
          * com.jonathan.group_project.models.User, messageTemplate='Confirm Password is
          * required!'}
          */
-        // userService.updateUser(user);
-        return "redirect:/profile";
+        userService.updateUser(user);
+        return "redirect:/home";
     }
 
 }

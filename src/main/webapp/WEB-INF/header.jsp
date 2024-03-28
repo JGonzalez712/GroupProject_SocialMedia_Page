@@ -17,9 +17,8 @@
 				<div
 					class="d-flex align-items-center justify-content-between ms-auto">
 
-					<img src="/images/avatar.png" class="rounded " alt="avatar"
-						style="width: 32px; height: 32px"> <div><a class="ml-3 px-3"
-						href="/profile">${loggedUser.firstname} ${loggedUser.lastname}</a>
+						<img src="https://i.pravatar.cc/150?u=${loggedUser.id }" class="rounded" alt="avatar"
+								style="width: 64px; height: 64px">${loggedUser.firstname}</a>
 						</div >  <a href="/logOut"
 						class="text-decoration-none btn btn-dark mx-2 px-3 pt-1"><i
 						class="fa-solid fa-right-from-bracket fa-xl"></i></a>
