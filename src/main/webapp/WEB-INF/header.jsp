@@ -18,9 +18,9 @@
 					class="d-flex align-items-center justify-content-between ms-auto">
 
 					<img src="/images/avatar.png" class="rounded " alt="avatar"
-						style="width: 32px; height: 32px"> <div><a class="ml-3 pl-3"
-						href="#">${loggedUser.username }</a>
-						</div >  <a href="/logout"
+						style="width: 32px; height: 32px"> <div><a class="ml-3 px-3"
+						href="/profile">${loggedUser.firstname} ${loggedUser.lastname}</a>
+						</div >  <a href="/logOut"
 						class="text-decoration-none btn btn-dark mx-2 px-3 pt-1"><i
 						class="fa-solid fa-right-from-bracket fa-xl"></i></a>
 				</div>
