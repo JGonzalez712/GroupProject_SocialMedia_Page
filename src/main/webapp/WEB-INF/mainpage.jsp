@@ -34,7 +34,7 @@
 
 	<%@ include file="header.jsp"%>
 
-	<div class="container-fluid d-flex pb-4 shadow-top">
+	<div class="container-fluid d-flex pb-4">
 
 		<%@ include file="left-column.jsp"%>
 

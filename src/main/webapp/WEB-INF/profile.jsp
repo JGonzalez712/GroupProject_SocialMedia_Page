@@ -20,7 +20,7 @@
 <body>
 
 	<%@ include file="header.jsp"%>
-	    <div class="container-fluid p-5 shadow-top  "   >
+	    <div class="container-fluid p-5"   >
 	    	
 	        <section class="row border-bottom pb-3">
 	            <h1 class="text-1xl">${loggedUser.firstname} ${loggedUser.lastname}</h1>
