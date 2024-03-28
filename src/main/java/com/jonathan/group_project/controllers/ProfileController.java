@@ -38,8 +38,11 @@ public class ProfileController {
     }
 
     @PutMapping("/edit")
-    public String editProfile(@Valid @ModelAttribute("loggedUser") User user, BindingResult result) {
+    public String editProfile(@Valid @ModelAttribute("loggedUser") User user, BindingResult result,HttpSession session, Model model) {
+    	if (session.getAttribute("loggedInId") == null) {
 
+            return "redirect:/";
+        }
         if (result.hasErrors()) {
             System.out.println(result.toString());
 
@@ -61,8 +64,12 @@ public class ProfileController {
          * com.jonathan.group_project.models.User, messageTemplate='Confirm Password is
          * required!'}
          */
+        long loggedUserId = (Long) session.getAttribute("loggedInId");
+
+        User loggedUser = userService.findOneUser(loggedUserId);
+        model.addAttribute("loggedUser", loggedUser);
         userService.updateUser(user);
-        return "redirect:/home";
+        return "redirect:/profile/" + loggedUser.getId();
     }
 
 }
