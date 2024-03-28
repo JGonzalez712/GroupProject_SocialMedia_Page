@@ -38,6 +38,12 @@ public class User {
 
 	@Column(nullable = true)
 	private String lastname;
+	
+	@Column(nullable = true)
+	private String profilePhoto;
+	
+	@Column(nullable = true)
+	private String about;
 
 	@NotBlank(message = "Username is required!")
 	@Size(min = 3, max = 30, message = "Username must be between 3 characters")
@@ -50,9 +56,9 @@ public class User {
 	@NotBlank(message = "Password is required!")
 	@Size(min = 8, max = 128, message = "Password must be at least 8 characterds")
 	private String password;
-
+	
 	@Transient
-	@NotEmpty(message = "Confirm Password is required!")
+	/* @NotEmpty(message = "Confirm Password is required!") */ //This was causing the error for editing the user, to handle confirm password validation we'll have to do it from controller
 	@Size(min = 8, max = 128, message = "Confirm Password must be at least 8")
 	private String confirm;
 
@@ -206,5 +212,23 @@ public class User {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+
+	public String getProfilePhoto() {
+		return profilePhoto;
+	}
+
+	public void setProfilePhoto(String profilePhoto) {
+		this.profilePhoto = profilePhoto;
+	}
+
+	public String getAbout() {
+		return about;
+	}
+
+	public void setAbout(String about) {
+		this.about = about;
+	}
+	
+	
 
 }

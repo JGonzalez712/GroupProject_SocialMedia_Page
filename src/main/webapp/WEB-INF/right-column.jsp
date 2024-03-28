@@ -14,9 +14,11 @@
 		We need to work on retrieving random users and preventing the retrieval of the logged-in user. However, I think it looks better than having default users -->
 		<c:forEach var="user" items="${users}" begin="0" end="1">
 			<div class="d-flex justify-content-evenly mb-3 align-items-center">
-				<img src="https://avatar.iran.liara.run/username?username=${user.firstname}+${user.lastname}" class="rounded"
+				<img src="https://i.pravatar.cc/150?u=${user.id }" class="rounded"
 					alt="avatar" style="width: 64px; height: 64px">
-				<label>${user.firstname} ${user.lastname}</label>
+					<%-- <img alt="" src="https://ui-avatars.com/api/?name=${user.username}&length=1"> --%>
+					
+				<label>${user.username}</label>
 				<button class="btn btn-dark btn-sm">Follow</button>
 			</div>
 		</c:forEach>

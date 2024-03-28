@@ -80,8 +80,5 @@ public class CommentLikedByUsers {
 	public void setComment(Comment comment) {
 		this.comment = comment;
 	}
-
-	
-	
 	
 }
