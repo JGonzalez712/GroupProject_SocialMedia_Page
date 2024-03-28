@@ -26,7 +26,7 @@
 
 	<%@ include file="header.jsp"%>
 
-	<div class="container-fluid d-flex pb-4">
+	<div class="container-fluid d-flex pb-4 shadow-top">
 
 		<%@ include file="left-column.jsp"%>
 
